@@ -1,81 +1,72 @@
-let books = [];
-
-function Addbooks(author, title) {
-  this.author = author;
-  this.title = title;
-}
-
-// let married = new Addbooks("Jimmy", "Main");
-
 const titleObj = document.getElementById("title");
 const authorObj = document.getElementById("author");
 const formObj = document.getElementById("form");
-// const add = document.getElementById('add');
 
-let married = {};
+let books = [];
+
+function addBooks(author, title, bookId) {
+  this.author = author;
+  this.title = title;
+  this.bookId = bookId;
+}
 
 formObj.addEventListener("submit", (event) => {
   event.preventDefault();
-
-  married = new Addbooks(titleObj.value, authorObj.value);
-
-  books.push(married);
+  //const ids = Math.floor(Math.random() * 100000);
+  const newBook = new addBooks(authorObj.value, titleObj.value);
+  books.push(newBook)
+  const newBookObj = JSON.stringify(books);
+  saveToStorage(newBookObj)
   bookDetails();
-
-  /*   const objectToString = JSON.stringify(books);
-    localStorage.setItem('xx', objectToString) */
 });
 
-// console.log(books)
-/* const data = localStorage.getItem('xx');
-const dataParsed = JSON.parse(data);
-console.log(dataParsed) */
+const saveToStorage = (booksObj) => {
+  localStorage.setItem('str', booksObj);
+}
 
 const bookDetails = () => {
+
+  const getDataFromStorage = localStorage.getItem('str');
+  const parsedData = JSON.parse(getDataFromStorage);
+
   const booksDiv = document.getElementById("books-list");
   booksDiv.innerHTML = "";
 
-  const objectToString = JSON.stringify(books);
-  localStorage.setItem("xx", objectToString);
+  if (!parsedData) {
+    booksDiv.innerHTML = '<p>No books available.</p>';
+  } else {
 
-  // console.log(books)
-  const data = localStorage.getItem("xx");
-  const dataParsed = JSON.parse(data);
-  console.log(dataParsed);
+    // }
+    parsedData.forEach((book, index) => {
+      book.id = index + 1;
 
+      booksDiv.innerHTML += `
+      <div class="book" id="book">
+        <p>${book.title}</p>
+        <p>${book.author}</p>
+      </div>
+    `;
 
-  dataParsed.forEach((i) => {
-    //for (let i in books) {
-    const bookDiv = document.createElement("div");
-    bookDiv.setAttribute("id", "book");
-    booksDiv.appendChild(bookDiv);
+      const removeBtn = document.createElement("button");
+      removeBtn.className = "remove-btn";
+      removeBtn.id = "btn" + book.id;
+      removeBtn.setAttribute('type', 'submit');
+      booksDiv.appendChild(removeBtn);
+      removeBtn.appendChild(document.createTextNode("Remove" + index));
 
-    const bookAuthor = document.createElement("p");
-    bookAuthor.id = "bookAuthor";
-    bookDiv.appendChild(bookAuthor);
-    bookAuthor.appendChild(document.createTextNode(i.author));
+      function deleteFun(x) {
+        removeBtn.addEventListener('click', () => {
+          console.log(x)
+        })
+      }
+      deleteFun(index)
 
-    const bookTitle = document.createElement("p");
-    bookTitle.id = "bookTitle";
-    bookDiv.appendChild(bookTitle);
-    bookTitle.appendChild(document.createTextNode(i.title));
-
-    const removeBtn = document.createElement("button");
-    // removeBtn.id = "remove-btn";
-    removeBtn.className = "remove-btn";
-    removeBtn.setAttribute('type', 'submit');
-    bookDiv.appendChild(removeBtn);
-    removeBtn.appendChild(document.createTextNode("Remove"));
-    // console.log(i)
-    const deleteOne =  document.querySelectorAll('.remove-btn')
-  deleteOne.forEach(i => {
-    i.addEventListener('click', () => {
-      // // dataParsed.remove('');
-      // console.log('btn-1')
-  })
-}) 
-  });
-
-  // }
+    });
+  }
 };
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  bookDetails();
+})
