@@ -39,7 +39,16 @@ class Books {
   }
 
   // eslint-disable-next-line class-methods-use-this
-
+  deleteBook(e) {
+    if (e.classList.contains('btn')) {
+      // Retrieve data-id attribute.
+      // It's a string, change it into number
+      const id = Number(e.getAttribute('data-id'));
+      totalBooks = totalBooks.filter((book) => book.id !== id);
+      localStorage.setItem('store', JSON.stringify(totalBooks));
+      e.parentElement.remove();
+    }
+  }
 }
 
 const book = new Books();
@@ -62,3 +71,6 @@ formObj.addEventListener('submit', (e) => {
   formObj.reset();
 });
 
+container.addEventListener('click', (e) => {
+  book.deleteBook(e.target);
+});
