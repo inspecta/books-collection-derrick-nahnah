@@ -41,6 +41,9 @@ class Books {
       Books.totalBooks = Books.totalBooks.filter((book) => book.id !== id);
       localStorage.setItem('store', JSON.stringify(Books.totalBooks));
       e.parentElement.remove();
+      if (Books.totalBooks.length === 0) {
+        container.innerHTML = '<p class="no-books">No books available!</p>';
+      }
     }
   }
 }
@@ -68,3 +71,7 @@ formObj.addEventListener('submit', (e) => {
 container.addEventListener('click', (e) => {
   book.deleteBook(e.target);
 });
+
+if (Books.totalBooks.length === 0) {
+  container.innerHTML = '<p class="no-books">No books available!</p>';
+}
