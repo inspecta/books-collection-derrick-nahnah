@@ -1,13 +1,8 @@
-/* eslint-disable linebreak-style */
 const titleObj = document.querySelector('#title');
 const authorObj = document.querySelector('#author');
 const formObj = document.querySelector('#form');
 const container = document.getElementById('books-list');
-// eslint-disable-next-line no-unused-vars
-const reBtn = document.querySelector('.btn');
-// totalBooks = JSON.parse(localStorage.getItem('store')) || [];
 
-// BOOK CLASS CREATION
 class Books {
   constructor() {
     this.books = [];
@@ -19,16 +14,15 @@ class Books {
     return this.books;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   deleteBook(e) {
     if (e.classList.contains('btn')) {
       // Retrieve data-id attribute.
       // It's a string, change it into number
       const id = Number(e.getAttribute('data-id'));
-      Books.totalBooks = Books.totalBooks.filter((book) => book.id !== id);
-      localStorage.setItem('store', JSON.stringify(Books.totalBooks));
+      this.books = this.books.filter((book) => book.id !== id);
+      localStorage.setItem('store', JSON.stringify(this.books));
       e.parentElement.remove();
-      if (Books.totalBooks.length === 0) {
+      if (this.books.length === 0) {
         container.innerHTML = '<p class="no-books">No books available!</p>';
       }
     }
@@ -39,7 +33,6 @@ class Books {
     return this.books;
   }
 
-  // eslint-disable-next-line class-methods-use-this
   static displayBooks(bookObj) {
     const holder = document.createElement('div');
     const titleAuthor = document.createElement('p');
@@ -58,7 +51,6 @@ class Books {
 }
 
 const book = new Books();
-
 book.books = Books.retrieveFromLocalStorage('store') || [];
 
 function loopFunc() {
@@ -77,10 +69,10 @@ formObj.addEventListener('submit', (e) => {
   formObj.reset();
 });
 
-/* container.addEventListener('click', (e) => {
+container.addEventListener('click', (e) => {
   book.deleteBook(e.target);
 });
 
-if (Books.totalBooks.length === 0) {
+if (book.books.length === 0) {
   container.innerHTML = '<p class="no-books">No books available!</p>';
-} */
+}
