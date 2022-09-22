@@ -3,6 +3,40 @@ html {
   font-family: cursive;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid;
+}
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+.nav-link {
+  display: flex;
+  list-style: none;
+}
+
+.nav-link li.active a {
+  color: blue;
+}
+
+.nav-link li::after {
+  content: " | ";
+  padding: 0 1rem;
+}
+
+.nav-link li:last-child::after {
+  content: "";
+}
+
+.date-time {
+  text-align: right;
+  margin-bottom: 2em;
+}
+
 #form {
   display: flex;
   flex-direction: column;
@@ -18,7 +52,16 @@ input {
 .form-styles {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
+  height: 74vh;
+}
+
+.home {
+  height: 74vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .books-list {
@@ -47,7 +90,7 @@ input {
 }
 
 #add {
-  width: 15%;
+  width: 60px;
   margin-left: auto;
 }
 
@@ -58,10 +101,31 @@ input {
 
 h1 {
   text-align: center;
+  clear: right;
 }
 
 .no-books {
   padding: 0;
   margin: 0;
   text-align: center;
+}
+
+h3 {
+  text-align: center;
+}
+
+.contactSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 74vh;
+  align-items: center;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid #000;
+  height: 2em;
+  align-items: center;
 }
