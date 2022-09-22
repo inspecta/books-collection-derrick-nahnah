@@ -1,35 +1,22 @@
+/* eslint-disable linebreak-style */
 const titleObj = document.querySelector('#title');
 const authorObj = document.querySelector('#author');
 const formObj = document.querySelector('#form');
 const container = document.getElementById('books-list');
 // eslint-disable-next-line no-unused-vars
 const reBtn = document.querySelector('.btn');
+// totalBooks = JSON.parse(localStorage.getItem('store')) || [];
 
 // BOOK CLASS CREATION
 class Books {
-  constructor(title, author, id) {
-    this.title = title;
-    this.author = author;
-    this.id = id;
+  constructor() {
+    this.books = [];
   }
 
-  static totalBooks = JSON.parse(localStorage.getItem('store')) || [];
-
-  // eslint-disable-next-line class-methods-use-this
-  displayBooks(bookObj) {
-    const holder = document.createElement('div');
-    const titleAuthor = document.createElement('p');
-    const removeBtn = document.createElement('button');
-
-    titleAuthor.innerText = `"${bookObj.title}" by ${bookObj.author}`;
-    removeBtn.innerText = 'Remove';
-    removeBtn.setAttribute('data-id', bookObj.id);
-    removeBtn.className = 'btn';
-    titleAuthor.className = 'title-author';
-    holder.className = 'book-holder';
-    holder.append(titleAuthor);
-    holder.append(removeBtn);
-    container.append(holder);
+  addBook(title, author) {
+    const id = Math.floor(Math.random() * 10000);
+    this.books = this.books.concat({ title, author, id });
+    return this.books;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -46,32 +33,54 @@ class Books {
       }
     }
   }
+
+  static retrieveFromLocalStorage(key) {
+    this.books = JSON.parse(localStorage.getItem(key));
+    return this.books;
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  static displayBooks(bookObj) {
+    const holder = document.createElement('div');
+    const titleAuthor = document.createElement('p');
+    const removeBtn = document.createElement('button');
+
+    titleAuthor.innerText = `"${bookObj.title}" by ${bookObj.author}`;
+    removeBtn.innerText = 'Remove';
+    removeBtn.setAttribute('data-id', bookObj.id);
+    removeBtn.className = 'btn';
+    titleAuthor.className = 'title-author';
+    holder.className = 'book-holder';
+    holder.append(titleAuthor);
+    holder.append(removeBtn);
+    container.append(holder);
+  }
 }
 
 const book = new Books();
 
+book.books = Books.retrieveFromLocalStorage('store') || [];
+
 function loopFunc() {
-  Books.totalBooks.forEach((e) => {
-    book.displayBooks(e);
+  book.books.forEach((e) => {
+    Books.displayBooks(e);
   });
 }
 loopFunc();
 
 formObj.addEventListener('submit', (e) => {
   e.preventDefault();
-  const id = Math.floor(Math.random() * 10000);
-  const book = new Books(titleObj.value, authorObj.value, id);
+  book.addBook(titleObj.value, authorObj.value);
   container.innerHTML = '';
-  Books.totalBooks.push(book);
-  localStorage.setItem('store', JSON.stringify(Books.totalBooks));
+  localStorage.setItem('store', JSON.stringify(book.books));
   loopFunc();
   formObj.reset();
 });
 
-container.addEventListener('click', (e) => {
+/* container.addEventListener('click', (e) => {
   book.deleteBook(e.target);
 });
 
 if (Books.totalBooks.length === 0) {
   container.innerHTML = '<p class="no-books">No books available!</p>';
-}
+} */
