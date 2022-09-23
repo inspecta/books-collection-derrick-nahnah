@@ -3,6 +3,27 @@ html {
   font-family: cursive;
 }
 
+nav {
+  display: flex;
+  justify-content: space-between;
+  border: 3px solid ;
+}
+ul {
+  display: flex;
+  list-style: none;
+}
+
+li:after { 
+  content: " | ";
+  padding: 0rem 1rem;
+  }
+  li:last-child:after {
+    content: '';
+  }
+a {
+  color: #000;
+  text-decoration: none;
+  }
 #form {
   display: flex;
   flex-direction: column;
@@ -64,4 +85,9 @@ h1 {
   padding: 0;
   margin: 0;
   text-align: center;
+}
+
+footer {
+  display: flex;
+  justify-content: space-between;
 }

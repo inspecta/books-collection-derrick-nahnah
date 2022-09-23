@@ -76,3 +76,33 @@ container.addEventListener('click', (e) => {
 if (book.books.length === 0) {
   container.innerHTML = '<p class="no-books">No books available!</p>';
 }
+
+
+const homePageSection = document.getElementById('home-page');
+const addPageSection = document.getElementById('add-page');
+const contactPageSection = document.getElementById('contact-page');
+
+const linksBtn = document.getElementById('lists');
+const addBookBtn = document.getElementById('add-link');
+const contactBtn = document.getElementById('contact');
+
+const activePage = document.querySelector('.active')
+
+
+linksBtn.addEventListener('click', () => {
+addPageSection.style.display = 'none';
+contactPageSection.style.display = 'none';
+homePageSection.style.display = 'block';
+});
+
+addBookBtn.addEventListener('click', () => {
+  homePageSection.style.display = 'none';
+  contactPageSection.style.display = 'none';
+  addPageSection.style.display = 'block';
+  });
+
+contactBtn.addEventListener('click', () => {
+addPageSection.style.display = 'none';
+homePageSection.style.display = 'none';
+contactPageSection.style.display = 'block';
+});
