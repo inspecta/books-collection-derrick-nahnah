@@ -8,6 +8,12 @@ nav {
   justify-content: space-between;
   border: 3px solid;
 }
+
+a {
+  color: #000;
+  text-decoration: none;
+}
+
 .nav-link {
   display: flex;
   list-style: none;
@@ -17,18 +23,13 @@ nav {
   color: blue;
 }
 
-.nav-link li:after {
+.nav-link li::after {
   content: " | ";
-  padding: 0rem 1rem;
+  padding: 0 1rem;
 }
 
-.nav-link li:last-child:after {
+.nav-link li:last-child::after {
   content: "";
-}
-
-a {
-  color: #000;
-  text-decoration: none;
 }
 
 .date-time {
