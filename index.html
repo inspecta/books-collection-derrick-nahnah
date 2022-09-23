@@ -10,18 +10,42 @@
   </head>
   <body id="body">
     <!-- <div> -->
-    <h1>All awesome books</h1>
-    <div id="books-list" class="books-list"></div>
-    <hr />
-    <div class="form-styles">
-    <h3>Add a new book</h3>
-    <form id="form">
-      <input type="text" id="title" placeholder="Title" required />
-      <input type="text" id="author" placeholder="Author" required />
-      <button type="submit" id="add">Add</button>
-    </form>
-  </div>
+      <nav>
+        <p>Awesome Books</p>
+        <ul>
+          <li id="lists"><a href="#home-page">List</a></li>
+          <li id="add-link"><a href="#add-page">Add new</a></li>
+          <li id="contact"><a href="#contact-page">Contact</a></li>
+        </ul>
+      </nav>
+
+      <section id="home-page">
+        <div class="date-time"></div>
+
+        <h1>All awesome books</h1>
+        <div id="books-list" class="books-list"></div>
+
+      </section>
+
+    <section id="add-page">
+      <div class="form-styles">
+        <h3>Add a new book</h3>
+        <form id="form">
+          <input type="text" id="title" placeholder="Title" required />
+          <input type="text" id="author" placeholder="Author" required />
+          <button type="submit" id="add">Add</button>
+        </form>
+      </div>
+    </section>
+
+    <section id="contact-page">
+
+    </section>
     <!-- </div> -->
+    <footer>
+      <p>Copyright of D & N</p>
+      <P>&copy; 2022</P>
+    </footer>
     <script src="./books.js" defer></script>
   </body>
 </html>
