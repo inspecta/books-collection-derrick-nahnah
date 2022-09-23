@@ -54,11 +54,11 @@ input {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 70vh;
+  height: 74vh;
 }
 
 .home {
-  height: 70vh;
+  height: 74vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -118,7 +118,7 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 70vh;
+  height: 74vh;
   align-items: center;
 }
 
