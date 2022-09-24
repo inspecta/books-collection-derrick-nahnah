@@ -125,13 +125,17 @@ const dateTime = document.querySelector('.date-time');
 const date = new Date();
 
 // March 19th 2022, 9.25:32 am
-const year = date.getFullYear();
-const month = date.toLocaleString('default', { month: 'long' });
-const day = date.getDate();
+const setTime = () => {
+  const year = date.getFullYear();
+  const month = date.toLocaleString('default', { month: 'long' });
+  const day = date.getDate();
 
-const hours = date.getHours({ hour12: true });
-const minutes = date.getMinutes();
-const seconds = date.getSeconds();
+  const hours = date.getHours({ hour12: true });
+  const minutes = date.getMinutes();
+  const seconds = date.getSeconds();
 
-const finalDate = ''.concat(month, ' ', day, '/', year, ', ', hours, '.', minutes, ':', seconds);
-dateTime.innerHTML = finalDate;
+  const finalDate = ''.concat(month, ' ', day, '/', year, ', ', hours, '.', minutes, ':', seconds);
+  dateTime.innerHTML = finalDate;
+};
+
+setInterval(setTime, 1000);
