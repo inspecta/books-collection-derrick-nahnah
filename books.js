@@ -136,7 +136,6 @@ const setTime = () => {
 
   const finalDate = ''.concat(month, ' ', day, '/', year, ', ', hours, '.', minutes, ':', seconds);
   dateTime.innerHTML = finalDate;
-}
+};
 
 setInterval(setTime, 1000);
-
